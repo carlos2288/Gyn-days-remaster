@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { View, Text, KeyboardAvoidingView, Keyboard, Platform, Image,
      TextInput, TouchableOpacity, TouchableWithoutFeedback, StatusBar } from 'react-native';
 import {Feather} from '@expo/vector-icons';
@@ -7,17 +7,10 @@ import logoImg from '../../../assets/logo.png';
 import TextCustom from '../../../utils/fonts';
 import {useNavigation} from '@react-navigation/native';
 import {Button} from 'react-native-elements';
-import Usuario from '../../../../model/Usuario'
-import { _cadastro } from '../../../../utils/memoria';
-//import {} from '@expo';
+import {} from '@expo';
 
 export default function SignUp1(){
-    var [nome,setNome] = React.useState()
-    var [email,setEmail] = React.useState()
-    var [senha,setSenha] = React.useState()
-    var [confirmarSenha,setComfirmarSenha] = React.useState()
-    var [endereco,setEndereco] = React.useState()
-    var [contato,SetContato] = React.useState()
+    
     const navigation = useNavigation();
 
     function handleToLogin(){
@@ -27,30 +20,6 @@ export default function SignUp1(){
     function handleToSignUp2(){
         navigation.navigate('SignUp2')
     }
-
-    function cadastro(){
-        if(nome && email && senha && confirmarSenha && endereco && contato){
-            _cadastro(user=>{
-                if(senha == confirmarSenha){
-                    var data = new Date()
-                    user.nome = nome
-                    user.senha = senha
-                    user.email = email
-                    user.endereco = endereco
-                    user.contato = contato
-                    user.dataInicio = data.getDate() +"/"+(data.getMonth()+1)+'/'+data.getFullYear()
-                    navigation.navigate('SignUp2')
-                    return user
-                }else{
-                    alert('A senha e a confirmação de senha diferem, por vafor verifique e tente novamente')
-                    return null
-                }
-            })
-        }else{
-            alert('preencha todos os campos')
-        }
-        
-    } 
     
     return(
         <KeyboardAvoidingView
@@ -78,8 +47,8 @@ export default function SignUp1(){
                     placeholder='Nome e Sobrenome'
                     placeholderTextColor="#A0A0A0"
                     returnKeyType="next"
-                    onChangeText = {text=>setNome(text)}
-                    >{nome}
+                    
+                    >
                     </TextInput>
                     <TextCustom style={styles.textInputSignUp}>Email:</TextCustom>
                     <TextInput
@@ -88,8 +57,7 @@ export default function SignUp1(){
                         placeholder='example@email.com'
                         placeholderTextColor="#A0A0A0"
                         returnKeyType="next"
-                        onChangeText={text=>{setEmail(text)}}
-                        >{email}</TextInput>
+                        ></TextInput>
                     <TextCustom style={styles.textInputSignUp}>Senha:</TextCustom>
                     <TextInput
                         textContentType={"password"}
@@ -97,8 +65,7 @@ export default function SignUp1(){
                         placeholder='password'
                         placeholderTextColor="#A0A0A0"
                         returnKeyType="next"
-                        onChangeText={text=>{setSenha(text)}}
-                        >{senha}</TextInput>
+                        ></TextInput>
                     <TextCustom style={styles.textInputSignUp}>Confirmar Senha:</TextCustom>
                     <TextInput
                         textContentType={"password"}
@@ -106,8 +73,7 @@ export default function SignUp1(){
                         placeholder='confirm password'
                         placeholderTextColor="#A0A0A0"
                         returnKeyType="next"
-                        onChangeText={text=>{setComfirmarSenha(text)}}
-                        >{confirmarSenha}</TextInput>
+                        ></TextInput>
                     <TextCustom style={styles.textInputSignUp}>Endereço:</TextCustom>
                     <TextInput
                         textContentType={"fullStreetAddress"}
@@ -116,8 +82,7 @@ export default function SignUp1(){
                         placeholder='Rua, Numero, Bairro'
                         placeholderTextColor="#A0A0A0"
                         returnKeyType="next"
-                        onChangeText={text=>{setEndereco(text)}}
-                        >{endereco}</TextInput>
+                        ></TextInput>
                     <TextCustom style={styles.textInputSignUp}>Contato:</TextCustom>
                     <TextInput
                         textContentType={"telephoneNumber"}
@@ -125,14 +90,11 @@ export default function SignUp1(){
                         placeholder='55(11)8888-8888'
                         placeholderTextColor="#A0A0A0"
                         returnKeyType="next"
-                        onChangeText={text=>{SetContato(text)}}
-                        >{contato}</TextInput>
+                        ></TextInput>
                     
             </View>
-                <Button type="clear" title="Continuar"  titleStyle={styles.buttonStyle}onPress={
-                    cadastro
-                }/>
-                <View style={{ height: 1 }} />
+            <Button onPress={handleToSignUp2} type="clear" title="Continuar"  titleStyle={styles.buttonStyle}/>
+            <View style={{ height: 1 }} />
             </View>
             
         </TouchableWithoutFeedback>

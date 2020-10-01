@@ -8,14 +8,11 @@ import bgLogin from '../../assets/Bg-Login.png';
 import styles from './styles';
 import TextCustom from '../../utils/fonts';
 import { Feather } from '@expo/vector-icons';
-import { _retrieveData } from '../../../utils/memoria';
 
 
 export default function Login(){
 
     const navigation = useNavigation();
-    var [email,setEmail] = React.useState()
-    var [senha,setSenha] = React.useState()
 
     function navigateToSignUp(){
         navigation.navigate('SignUp1');
@@ -24,23 +21,7 @@ export default function Login(){
     function navigateToHome(){
         navigation.navigate('HomeTab');
     }
-    function login(){
-        _retrieveData((user)=>{
-            user = JSON.parse(user)
-            if(email && senha){
-                if(true){
-                    if(email == user.email && senha == user.senha){
-                        navigation.navigate('HomeTab')
-                    }else{
-                        alert('Usuário ou senha incorretos')
-                    }
-                }else{
-                    alert('Faça Seu cadastro')
-                }
-                
-            }
-        })
-    }
+
     return(
         <KeyboardAvoidingView 
             style={styles.container}
@@ -67,8 +48,8 @@ export default function Login(){
                     placeholder='nickname@email.com'
                     placeholderTextColor="#A0A0A0"
                     returnKeyType="next"
-                    onChangeText={text=>setEmail(text)}
-                    >{email}
+                    
+                    >
                     </TextInput>
                     <TextCustom style={styles.textInputLogin}>Password:</TextCustom>
                     <TextInput
@@ -79,11 +60,9 @@ export default function Login(){
                         placeholderTextColor="#A0A0A0"
                         returnKeyType="done"
                         secureTextEntry={true}
-                        onChangeText={text=>{setSenha(text)}}
-                        >{senha}</TextInput>
+                        />
                 </View>
-                <Button onPress={login} type="clear" title="Login" titleStyle={styles.buttonStyle}/>
-                
+                <Button onPress={navigateToHome} type="clear" title="Login" titleStyle={styles.buttonStyle}/>
                 <TouchableOpacity 
                     style={styles.buttonSignUp}
                     onPress={navigateToSignUp}

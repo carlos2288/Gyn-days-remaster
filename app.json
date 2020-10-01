@@ -22,12 +22,7 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier":"com.gdeste.gyndays",
       "supportsTablet": true
-    },
-    "android": {
-      "package": "com.gdeste.gyndays",
-      "versionCode": 1
     }
   }
 }
